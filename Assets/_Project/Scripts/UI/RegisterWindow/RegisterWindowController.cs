@@ -1,18 +1,16 @@
 ﻿
 using Assets._Project.Scripts.Infrastructure.Services;
-using ModestTree;
 using System;
-using Zenject;
 
 namespace Assets._Project.Scripts.UI.RegisterWindow
-{ 
+{
     public class RegisterWindowController : IDisposable
     {
         private IRegisterWindow _registerWindow;
         private IMessageService _nickService;
         private string _inputedName;
-        public event Action onRegistered; 
-        public RegisterWindowController(IRegisterWindow registerWindow, IMessageService nickService )
+        public event Action onRegistered;
+        public RegisterWindowController(IRegisterWindow registerWindow, IMessageService nickService)
         {
             _registerWindow = registerWindow;
             _nickService = nickService;
@@ -29,10 +27,10 @@ namespace Assets._Project.Scripts.UI.RegisterWindow
         {
             if (_inputedName == "" || _inputedName == null)
             {
-                _inputedName = _nickService.GenerateNick(); 
+                _inputedName = _nickService.GenerateNick();
             }
-           
-             _nickService.Save(_inputedName);
+
+            _nickService.Save(_inputedName);
             onRegistered?.Invoke();
             Dispose();
         }

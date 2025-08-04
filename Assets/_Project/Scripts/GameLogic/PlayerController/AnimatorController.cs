@@ -1,5 +1,4 @@
 ﻿using Mirror;
-using System;
 using UnityEngine;
 
 namespace Assets._Project.Scripts.GameLogic.PlayerController
@@ -18,7 +17,7 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
         private IMoveController _moveController;
 
         private bool _lastJumpState;
-        private bool _lastGroundState; 
+        private bool _lastGroundState;
 
         [SyncVar(hook = nameof(OnJumpChanged))]
         private bool _syncJump;
@@ -47,13 +46,13 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
 
             bool currentJump = _moveController.IsJump;
             bool currentGround = _moveController.IsGround;
-             
-            if (currentJump != _lastJumpState || currentGround != _lastGroundState)  
+
+            if (currentJump != _lastJumpState || currentGround != _lastGroundState)
             {
                 CmdUpdateJumpState(currentJump, currentGround);
                 _lastJumpState = currentJump;
                 _lastGroundState = currentGround;
-              
+
             }
         }
         private void LateUpdate()

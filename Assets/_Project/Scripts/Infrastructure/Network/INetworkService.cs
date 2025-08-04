@@ -1,7 +1,7 @@
-  
+
 namespace _Project.Scripts.Infrastructure.Network
-{ 
-    public interface INetworkService   
+{
+    public interface INetworkService
     {
         void ConnectOrHost();
     }

@@ -8,16 +8,16 @@ namespace Assets._Project.Scripts.UI
 {
     public class PlayerUi : NetworkBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _nickText; 
+        [SerializeField] private TextMeshProUGUI _nickText;
 
         private IMessageService _messageService;
-         
+
         [SyncVar(hook = nameof(OnNickChanged))]
         private string _syncedNick = "";
-         
+
         private void ResolveNickService()
-        { 
-                _messageService = ProjectContext.Instance.Container.Resolve<IMessageService>(); 
+        {
+            _messageService = ProjectContext.Instance.Container.Resolve<IMessageService>();
         }
 
         public override void OnStartLocalPlayer()
@@ -25,7 +25,7 @@ namespace Assets._Project.Scripts.UI
             if (isLocalPlayer)
             {
                 ResolveNickService();
-                 
+
                 if (_messageService != null)
                 {
                     string localNick = _messageService.GetNick();
@@ -36,7 +36,7 @@ namespace Assets._Project.Scripts.UI
 
         [Command]
         private void CmdSetPlayerNick(string nick)
-        { 
+        {
             _syncedNick = nick;
         }
 
@@ -44,18 +44,18 @@ namespace Assets._Project.Scripts.UI
         {
             _nickText.text = _syncedNick;
         }
-         
-         
+
+
         private void LateUpdate()
         {
             if (_nickText == null) return;
-            
-                if (Camera.main != null)
-                {
-                    _nickText.transform.LookAt(Camera.main.transform);
-                    _nickText.transform.Rotate(0, 180, 0);
-                }
-            
+
+            if (Camera.main != null)
+            {
+                _nickText.transform.LookAt(Camera.main.transform);
+                _nickText.transform.Rotate(0, 180, 0);
+            }
+
         }
     }
 }

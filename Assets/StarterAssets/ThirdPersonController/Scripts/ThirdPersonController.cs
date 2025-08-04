@@ -143,7 +143,7 @@ namespace StarterAssets
 
         private void Init()
         {
-      
+
 
             if (_mainCamera == null)
             {
@@ -153,12 +153,12 @@ namespace StarterAssets
             _chestVirtualCamera.Follow = CinemachineCameraTarget.transform;
 
         }
-     
+
 
         private void StartPlayer()
-        { 
+        {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -172,7 +172,7 @@ namespace StarterAssets
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
-            _fallTimeoutDelta = FallTimeout; 
+            _fallTimeoutDelta = FallTimeout;
         }
 
         private void Update()
@@ -193,7 +193,7 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-          
+
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("Jump");

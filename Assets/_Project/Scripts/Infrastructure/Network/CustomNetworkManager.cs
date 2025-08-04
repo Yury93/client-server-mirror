@@ -5,36 +5,36 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
- 
+
 
 namespace _Project.Scripts.Infrastructure.Network
 {
     public class CustomNetworkManager : NetworkManager, INetworkService
     {
         private IGameFactory _gameFactory;
-       
+
         [Inject]
         private void Construct(IGameFactory gameFactory)
         {
             this._gameFactory = gameFactory;
         }
-         
-        public void  ConnectOrHost()
-        { 
-          Debug.Log($"CustomNetworkManager: Попытка  подключения или запуска хоста на порту .");
+
+        public void ConnectOrHost()
+        {
+            Debug.Log($"CustomNetworkManager: Попытка  подключения или запуска хоста на порту .");
 
             try
-            { 
-                base.StartHost(); 
-            }
-            catch 
             {
-                Debug.Log($"CustomNetworkManager: Не удалось запустить хост (порт занят):. Попытка подключения как клиент..."); 
+                base.StartHost();
+            }
+            catch
+            {
+                Debug.Log($"CustomNetworkManager: Не удалось запустить хост (порт занят):. Попытка подключения как клиент...");
                 StartCoroutine(ConnectAsClientDelayed());
-            } 
-        } 
+            }
+        }
         private IEnumerator ConnectAsClientDelayed()
-        { 
+        {
             yield return new WaitForSeconds(0.1f);
             StartClientConnect();
         }
@@ -42,23 +42,23 @@ namespace _Project.Scripts.Infrastructure.Network
         private void StartClientConnect()
         {
             try
-            { 
+            {
                 Debug.Log($"CustomNetworkManager: Подключение клиента StartClient() ");
-                base.StartClient(); 
+                base.StartClient();
             }
             catch (Exception ex)
             {
                 Debug.LogError($"CustomNetworkManager: Ошибка при подключении клиента: {ex}");
-        
+
             }
         }
 
-     
+
         public override void OnStartHost()
         {
             base.OnStartHost();
             Debug.Log("CustomNetworkManager: Хост успешно запущен OnStartHost()");
-          
+
         }
 
         public override void OnStartClient()
@@ -72,8 +72,8 @@ namespace _Project.Scripts.Infrastructure.Network
             base.OnClientConnect();
             Debug.Log("CustomNetworkManager: Клиент успешно подключен к серверу OnClientConnect()");
 
-           
-             
+
+
             if (NetworkClient.ready)
             {
                 AddPlayerForThisClient();
@@ -84,16 +84,16 @@ namespace _Project.Scripts.Infrastructure.Network
             }
         }
 
-     
+
 
         public override void OnClientNotReady()
         {
             base.OnClientNotReady();
-            Debug.LogWarning("CustomNetworkManager: Клиент не готов."); 
+            Debug.LogWarning("CustomNetworkManager: Клиент не готов.");
         }
 
         private IEnumerator DelayedAddPlayer()
-        { 
+        {
             yield return new WaitForSeconds(0.5f);
 
             if (NetworkClient.ready)
@@ -103,7 +103,7 @@ namespace _Project.Scripts.Infrastructure.Network
             else
             {
                 Debug.LogWarning("CustomNetworkManager: Клиент так и не стал ready после ожидания. Попытка добавить игрока");
-                AddPlayerForThisClient(); 
+                AddPlayerForThisClient();
             }
         }
 
@@ -135,7 +135,7 @@ namespace _Project.Scripts.Infrastructure.Network
 
             try
             {
-                Transform spawnPointTransform = await SpawnPlayer(conn); 
+                Transform spawnPointTransform = await SpawnPlayer(conn);
                 await SpawnChat(spawnPointTransform);
             }
             catch (Exception e)

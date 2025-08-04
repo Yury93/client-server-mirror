@@ -12,12 +12,12 @@ namespace Assets._Project.Scripts.Infrastructure.GameStateMachine.States
         }
         public void Enter()
         {
-            
+
         }
 
         public void Exit()
         {
-          
+
         }
     }
 }
