@@ -1,6 +1,4 @@
-﻿using Zenject;
-
-namespace Assets._Project.Scripts.Infrastructure.GameStateMachine
+﻿namespace Assets._Project.Scripts.Infrastructure.GameStateMachine
 {
     public interface IState : IExitableState
     {
@@ -28,7 +26,7 @@ namespace Assets._Project.Scripts.Infrastructure.GameStateMachine
         private readonly IStateFactory _stateFactory;
         private IExitableState _currentState;
 
-        public GameStateMachine(IStateFactory stateFactory) => _stateFactory = stateFactory; 
+        public GameStateMachine(IStateFactory stateFactory) => _stateFactory = stateFactory;
 
         public void Enter<TState>() where TState : class, IState
         {
@@ -46,6 +44,6 @@ namespace Assets._Project.Scripts.Infrastructure.GameStateMachine
             newState.Enter(payLoad);
         }
 
-        private void ExitCurrentState() =>  _currentState?.Exit(); 
+        private void ExitCurrentState() => _currentState?.Exit();
     }
 }

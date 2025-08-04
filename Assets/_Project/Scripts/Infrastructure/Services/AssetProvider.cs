@@ -14,7 +14,7 @@ namespace Assets._Project.Scripts.Infrastructure.Services
         Task<GameObject> InstantiateAsync(string name, Transform parent);
         Task<Material> InstantiateMaterialAsync(string name);
         Task<GameObject> InstantiateNetworkObjectAsync(string name, bool checkForNetworkIdentity = true);
-        Task<T> LoadAsync<T>(string name) where T : class; 
+        Task<T> LoadAsync<T>(string name) where T : class;
     }
     public class AssetProvider : IAssetProvider
     {
@@ -78,7 +78,7 @@ namespace Assets._Project.Scripts.Infrastructure.Services
                 return null;
             }
 
-          
+
 
             var handle = Addressables.LoadAssetAsync<T>(name);
             _handleResources[name] = handle;
@@ -89,7 +89,7 @@ namespace Assets._Project.Scripts.Infrastructure.Services
             await handle.Task;
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-              
+
                 return handle.Result;
             }
             else
@@ -99,7 +99,7 @@ namespace Assets._Project.Scripts.Infrastructure.Services
             }
         }
         public async Task<GameObject> InstantiateNetworkObjectAsync(string name, bool checkForNetworkIdentity = true)
-        { 
+        {
             GameObject prefab = await LoadAsync<GameObject>(name);
 
             if (prefab == null)
@@ -107,7 +107,7 @@ namespace Assets._Project.Scripts.Infrastructure.Services
                 Debug.LogError($"AssetProvider: Префаб '{name}' не удалось загрузить из Addressables.");
                 return null;
             }
-             
+
             if (checkForNetworkIdentity)
             {
                 NetworkIdentity networkIdentity = prefab.GetComponent<NetworkIdentity>();
@@ -117,9 +117,9 @@ namespace Assets._Project.Scripts.Infrastructure.Services
                     return null;
                 }
             }
-             
+
             GameObject instance = GameObject.Instantiate(prefab);
-             
+
             if (instance == null)
             {
                 Debug.LogError($"AssetProvider: Не удалось создать инстанс префаба '{prefab.name}'.");

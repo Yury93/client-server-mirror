@@ -4,7 +4,6 @@ using Assets._Project.Scripts.Infrastructure.GameStateMachine;
 using Assets._Project.Scripts.Infrastructure.GameStateMachine.States;
 using Assets._Project.Scripts.Infrastructure.Services;
 using Assets._Project.Scripts.Infrastructure.Services.GameFactory;
-using Mirror;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +12,7 @@ namespace _Project.Scripts.Infrastructure.MonoInstallers
     public class InfrastructureInstaller : MonoInstaller<InfrastructureInstaller>, ICoroutineRunner
     {
         public override void InstallBindings()
-        { 
+        {
             BindNetworkManager();
             BindSceneLoader();
             BindGameFactory();
@@ -46,8 +45,8 @@ namespace _Project.Scripts.Infrastructure.MonoInstallers
         }
         private void BindNetworkManager()
         {
-          var customNetworkManager =  GameObject.FindAnyObjectByType<CustomNetworkManager>();
+            var customNetworkManager = GameObject.FindAnyObjectByType<CustomNetworkManager>();
             Container.Bind<INetworkService>().FromInstance(customNetworkManager);
-        } 
+        }
     }
 }

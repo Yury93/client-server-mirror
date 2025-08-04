@@ -1,4 +1,4 @@
-﻿using UnityEngine; 
+﻿using UnityEngine;
 
 namespace Assets._Project.Scripts.GameLogic.PlayerController
 {
@@ -9,13 +9,13 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
     public interface IMoveController : ITransformUpdater
     {
         float Speed { get; }
-        bool IsGround {  get; }
+        bool IsGround { get; }
         bool IsJump { get; }
         float MoveMagnitude { get; }
     }
     public class MoveController : IMoveController
     {
-        public float Speed => _moveLogic.CurrentSpeed; 
+        public float Speed => _moveLogic.CurrentSpeed;
         public bool IsGround => _moveLogic.IsGround;
         public bool IsJump => _inputHandler.JumpInput;
 
@@ -26,14 +26,14 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
         private Transform _cameraFollowTarget;
         private IInputHandler _inputHandler;
 
-        public MoveController(CharacterController characterController,Transform cameraFollowTarget,IInputHandler inputHandler, MoverData moverData, RotationData rotationData)
-        { 
+        public MoveController(CharacterController characterController, Transform cameraFollowTarget, IInputHandler inputHandler, MoverData moverData, RotationData rotationData)
+        {
             _moveLogic = new Mover(characterController, moverData);
             _rotateLogic = new Rotater(rotationData);
             _cameraFollowTarget = cameraFollowTarget;
             _inputHandler = inputHandler;
         }
-         
+
         public void Update(Transform transform)
         {
             _moveLogic.CheckGrounded(transform);

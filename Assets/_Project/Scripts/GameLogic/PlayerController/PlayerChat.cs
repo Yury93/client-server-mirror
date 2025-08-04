@@ -1,7 +1,6 @@
 
 using Assets._Project.Scripts.Infrastructure.Services;
 using Mirror;
-using System;
 using UnityEngine;
 using Zenject;
 namespace Assets._Project.Scripts.GameLogic.PlayerController
@@ -24,8 +23,8 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
 
         private void OnSendMessage(string message)
         {
-            if(isLocalPlayer) 
-            CmdSendMessage($"player: {playerName} \n {message}");
+            if (isLocalPlayer)
+                CmdSendMessage($"player: {playerName} \n {message}");
         }
         [Command]
         private void CmdSendMessage(string text)

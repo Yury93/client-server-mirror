@@ -1,13 +1,9 @@
-﻿
-using Assets._Project.Scripts.Infrastructure.Services;
-using Mirror;
-using TMPro;
+﻿using Mirror;
 using UnityEngine;
-using Zenject;
 
 namespace Assets._Project.Scripts.GameLogic.PlayerController
 {
-    [RequireComponent(typeof(CharacterController),typeof(AnimatorController))]
+    [RequireComponent(typeof(CharacterController), typeof(AnimatorController))]
     public class Player : NetworkBehaviour
     {
         [SerializeField] private MoverData _moverData;
@@ -15,16 +11,16 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private CameraFollowTarget _cameraFollowTarget;
         [SerializeField] private AnimatorController _animatorController;
-       
+
         private IInputHandler _inputHandler = null;
         private IMoveController _moveController = null;
-       
-        
+
+
         public override void OnStartLocalPlayer()
         {
             base.OnStartLocalPlayer();
             if (isLocalPlayer)
-            { 
+            {
                 _inputHandler = new InputHandler();
                 _moveController = new MoveController(
                     _characterController,
@@ -38,8 +34,8 @@ namespace Assets._Project.Scripts.GameLogic.PlayerController
         }
         private void Update()
         {
-            if(isLocalPlayer )
-            _moveController.Update(transform);
+            if (isLocalPlayer)
+                _moveController.Update(transform);
         }
     }
 }

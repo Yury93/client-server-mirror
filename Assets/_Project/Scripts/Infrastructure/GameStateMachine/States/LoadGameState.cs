@@ -9,7 +9,7 @@ namespace Assets._Project.Scripts.Infrastructure.GameStateMachine.States
         private IStateMachine _stateMachine;
         private INetworkService _networkService;
         [Inject]
-        public void Construct(SceneLoader sceneLoader,IStateMachine stateMachine,INetworkService networkService)
+        public void Construct(SceneLoader sceneLoader, IStateMachine stateMachine, INetworkService networkService)
         {
             this._stateMachine = stateMachine;
             this._sceneLoader = sceneLoader;
@@ -17,15 +17,16 @@ namespace Assets._Project.Scripts.Infrastructure.GameStateMachine.States
         }
         public void Enter(string sceneName)
         {
-             
-            this._sceneLoader.Load(sceneName, ()=> {
+
+            this._sceneLoader.Load(sceneName, () =>
+            {
                 _networkService.ConnectOrHost();
-                _stateMachine.Enter<CreateGameState>(); 
+                _stateMachine.Enter<CreateGameState>();
             });
         }
 
         public void Exit()
-        { 
+        {
         }
     }
 }

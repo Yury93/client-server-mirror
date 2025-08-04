@@ -25,14 +25,14 @@ namespace Assets._Project.Scripts.Infrastructure.Services
         {
             PlayerPrefs.SetString(PLAYER_NICK_PREFS, $"{name}");
         }
-       
+
         public string GenerateNick()
         {
-          var index =  UnityEngine.Random.Range(0, _randomNames.Length -1);
+            var index = UnityEngine.Random.Range(0, _randomNames.Length - 1);
             string name = $"{_randomNames[index]}";
             return name;
-        } 
-        public string GetNick() =>  PlayerPrefs.GetString(PLAYER_NICK_PREFS);
+        }
+        public string GetNick() => PlayerPrefs.GetString(PLAYER_NICK_PREFS);
 
         public void Send(string message)
         {
